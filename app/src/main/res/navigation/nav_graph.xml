@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/SignUpFragment">
+
+    <fragment
+        android:id="@+id/SignInFragment"
+        android:name="com.example.diplomafirst.SignInFragment"
+        android:label="SignInFragment">
+        <action
+            android:id="@+id/action_SignInFragment_to_SignUpFragment"
+            app:destination="@id/SignUpFragment" />
+        <action
+            android:id="@+id/action_SignInFragment_to_WorkFragment"
+            app:destination="@id/WorkFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/SignUpFragment"
+        android:name="com.example.diplomafirst.SignUpFragment"
+        android:label="SignUpFragment">
+        <action
+            android:id="@+id/action_SignUpFragment_to_SignInFragment"
+            app:destination="@id/SignInFragment" />
+        <action
+            android:id="@+id/action_SignUpFragment_to_WorkFragment"
+            app:destination="@id/WorkFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/WorkFragment"
+        android:name="com.example.diplomafirst.WorkFragment"
+        android:label="WorkFragment">
+        <action
+            android:id="@+id/action_WorkFragment_to_SignInFragment"
+            app:destination="@id/SignInFragment" />
+    </fragment>
+</navigation>

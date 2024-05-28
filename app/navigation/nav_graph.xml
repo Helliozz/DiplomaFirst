@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/thirdSignInFragment">
+
+    <fragment
+        android:id="@+id/firstSignInFragment"
+        android:name="com.example.ui.FirstSignInFragment"
+        android:label="FirstSignInFragment">
+        <action
+            android:id="@+id/action_firstSignInFragment_to_firstSignUpFragment"
+            app:destination="@id/firstSignUpFragment" />
+        <action
+            android:id="@+id/action_firstSignInFragment_to_firstWorkFragment"
+            app:destination="@id/firstWorkFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/firstSignUpFragment"
+        android:name="com.example.ui.FirstSignUpFragment"
+        android:label="FirstSignUpFragment">
+        <action
+            android:id="@+id/action_firstSignUpFragment_to_firstSignInFragment"
+            app:destination="@id/firstSignInFragment" />
+        <action
+            android:id="@+id/action_firstSignUpFragment_to_firstWorkFragment"
+            app:destination="@id/firstWorkFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/firstWorkFragment"
+        android:name="com.example.ui.FirstWorkFragment"
+        android:label="FirstWorkFragment">
+        <action
+            android:id="@+id/action_firstWorkFragment_to_firstSignInFragment"
+            app:destination="@id/firstSignInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/secondSignInFragment"
+        android:name="com.example.ui.SecondSignInFragment"
+        android:label="fragment_second_sign_in"
+        tools:layout="@layout/fragment_second_sign_in">
+        <action
+            android:id="@+id/action_secondSignInFragment_to_secondWorkFragment"
+            app:destination="@id/secondWorkFragment" />
+        <action
+            android:id="@+id/action_secondSignInFragment_to_secondSignUpFragment"
+            app:destination="@id/secondSignUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/secondSignUpFragment"
+        android:name="com.example.ui.SecondSignUpFragment"
+        android:label="fragment_second_sign_up"
+        tools:layout="@layout/fragment_second_sign_up">
+        <action
+            android:id="@+id/action_secondSignUpFragment_to_secondWorkFragment"
+            app:destination="@id/secondWorkFragment" />
+        <action
+            android:id="@+id/action_secondSignUpFragment_to_secondSignInFragment"
+            app:destination="@id/secondSignInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/secondWorkFragment"
+        android:name="com.example.ui.SecondWorkFragment"
+        android:label="fragment_second_work"
+        tools:layout="@layout/fragment_second_work">
+        <action
+            android:id="@+id/action_secondWorkFragment_to_secondSignInFragment"
+            app:destination="@id/secondSignInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/thirdSignInFragment"
+        android:name="com.example.ui.ThirdSignInFragment"
+        android:label="ThirdSignInFragment">
+        <action
+            android:id="@+id/action_thirdSignInFragment_to_thirdSignUpFragment"
+            app:destination="@id/thirdSignUpFragment" />
+        <action
+            android:id="@+id/action_thirdSignInFragment_to_thirdWorkFragment"
+            app:destination="@id/thirdWorkFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/thirdSignUpFragment"
+        android:name="com.example.ui.ThirdSignUpFragment"
+        android:label="ThirdSignUpFragment">
+        <action
+            android:id="@+id/action_thirdSignUpFragment_to_thirdWorkFragment"
+            app:destination="@id/thirdWorkFragment" />
+        <action
+            android:id="@+id/action_thirdSignUpFragment_to_thirdSignInFragment"
+            app:destination="@id/thirdSignInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/thirdWorkFragment"
+        android:name="com.example.ui.ThirdWorkFragment"
+        android:label="fragment_third_work"
+        tools:layout="@layout/fragment_third_work">
+        <action
+            android:id="@+id/action_thirdWorkFragment_to_thirdSignInFragment"
+            app:destination="@id/thirdSignInFragment" />
+    </fragment>
+</navigation>
