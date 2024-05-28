@@ -21,9 +21,6 @@ class WorkFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.signOut.setOnClickListener {
-            requireView().findNavController()
-                .navigate(R.id.action_WorkFragment_to_SignInFragment)
-        }
+
     }
 }

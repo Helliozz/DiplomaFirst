@@ -3,36 +3,45 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/SignUpFragment">
+    app:startDestination="@id/SignInFragment">
 
     <fragment
         android:id="@+id/SignInFragment"
         android:name="com.example.diplomafirst.SignInFragment"
-        android:label="SignInFragment">
+        android:label="SignInFragment"
+        tools:layout="@layout/fragment_sign_in">
         <action
             android:id="@+id/action_SignInFragment_to_SignUpFragment"
-            app:destination="@id/SignUpFragment" />
+            app:destination="@id/SignUpFragment"
+            app:popUpTo="@layout/fragment_sign_in"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_SignInFragment_to_WorkFragment"
-            app:destination="@id/WorkFragment" />
+            app:destination="@id/WorkFragment"
+            app:popUpTo="@layout/fragment_sign_in"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/SignUpFragment"
         android:name="com.example.diplomafirst.SignUpFragment"
-        android:label="SignUpFragment">
+        android:label="SignUpFragment"
+        tools:layout="@layout/fragment_sign_up">
         <action
             android:id="@+id/action_SignUpFragment_to_SignInFragment"
-            app:destination="@id/SignInFragment" />
+            app:destination="@id/SignInFragment"
+            app:popUpTo="@layout/fragment_sign_up"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_SignUpFragment_to_WorkFragment"
-            app:destination="@id/WorkFragment" />
+            app:destination="@id/WorkFragment"
+            app:popUpTo="@layout/fragment_sign_up"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/WorkFragment"
         android:name="com.example.diplomafirst.WorkFragment"
-        android:label="WorkFragment">
-        <action
-            android:id="@+id/action_WorkFragment_to_SignInFragment"
-            app:destination="@id/SignInFragment" />
+        android:label="WorkFragment"
+        tools:layout="@layout/fragment_work">
+
     </fragment>
 </navigation>
