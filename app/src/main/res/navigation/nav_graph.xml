@@ -17,7 +17,7 @@
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_SignInFragment_to_WorkFragment"
-            app:destination="@id/WorkFragment"
+            app:destination="@id/GalleryFragment"
             app:popUpTo="@layout/fragment_sign_in"
             app:popUpToInclusive="true" />
     </fragment>
@@ -33,15 +33,40 @@
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_SignUpFragment_to_WorkFragment"
-            app:destination="@id/WorkFragment"
+            app:destination="@id/GalleryFragment"
             app:popUpTo="@layout/fragment_sign_up"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
-        android:id="@+id/WorkFragment"
-        android:name="com.example.diplomafirst.WorkFragment"
+        android:id="@+id/GalleryFragment"
+        android:name="com.example.diplomafirst.GalleryFragment"
         android:label="WorkFragment"
-        tools:layout="@layout/fragment_work">
-
+        tools:layout="@layout/fragment_gallery">
+        <action
+            android:id="@+id/action_GalleryFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment"
+            app:popUpTo="@id/GalleryFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_GalleryFragment_to_SignInFragment"
+            app:destination="@id/SignInFragment"
+            app:popUpTo="@id/GalleryFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.example.diplomafirst.CameraFragment"
+        android:label="fragment_camera"
+        tools:layout="@layout/fragment_camera">
+        <action
+            android:id="@+id/action_cameraFragment_to_GalleryFragment"
+            app:destination="@id/GalleryFragment"
+            app:popUpTo="@id/cameraFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_cameraFragment_to_SignInFragment"
+            app:destination="@id/SignInFragment"
+            app:popUpTo="@id/cameraFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

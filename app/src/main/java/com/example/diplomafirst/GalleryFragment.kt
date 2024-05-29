@@ -5,18 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
-import com.example.diplomafirst.databinding.FragmentWorkBinding
+import com.example.diplomafirst.databinding.FragmentGalleryBinding
 
-class WorkFragment : Fragment() {
+class GalleryFragment : Fragment() {
 
-    private lateinit var binding: FragmentWorkBinding
+    private lateinit var binding: FragmentGalleryBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentWorkBinding.inflate(layoutInflater, container, false)
+        binding = FragmentGalleryBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 

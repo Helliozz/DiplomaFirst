@@ -102,6 +102,7 @@
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/button_to_gallery"
                 android:padding="15dp"
+                android:textAllCaps="false"
                 android:text="Go to the gallery"
                 android:textColor="#f6f6f6"
                 android:textSize="20sp"
