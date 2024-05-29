@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="EditText">
+        <item name="android:layout_width">385dp</item>
+        <item name="android:layout_height">62dp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColorHint">#63656B</item>
+        <item name="android:paddingBottom">19dp</item>
+        <item name="android:paddingTop">19dp</item>
+        <item name="android:paddingStart">13dp</item>
+    </style>
+
+    <style name="MainText">
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:textSize">39dp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="ClickableText">
+        <item name="android:textColor">#5265CE</item>
+        <item name="android:clickable">true</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_height">24dp</item>
+    </style>
+
+    <style name="Button" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:layout_width">385dp</item>
+        <item name="android:layout_height">62dp</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+</resources>

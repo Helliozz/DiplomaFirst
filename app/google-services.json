@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "672022290526",
+    "project_id": "fcm-diploma-base",
+    "storage_bucket": "fcm-diploma-base.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:672022290526:android:9b29bd57017e6e2954d4cf",
+        "android_client_info": {
+          "package_name": "com.example.cameraapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBE81ehzn4-o4ZRZ4BDeEj5ze-Rt1iMafI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
