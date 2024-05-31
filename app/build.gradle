@@ -67,6 +67,10 @@ dependencies {
 
     //CardView
     implementation "androidx.cardview:cardview:1.0.0"
+
+    // MQTT
+    implementation 'com.github.hannesa2:paho.mqtt.android:4.2'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0' // Legacy library which is necessary for MQTT to work
 }
 
 kapt {
