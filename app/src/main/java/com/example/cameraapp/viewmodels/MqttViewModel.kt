@@ -1,4 +1,4 @@
-package com.example.mqtt
+package com.example.cameraapp.viewmodels
 
 import android.content.Context
 import android.util.Log
@@ -11,6 +11,7 @@ import com.example.cameraapp.data.Constants.MQTT_SERVER_URI
 import com.example.cameraapp.data.Constants.MQTT_TOPIC_LIST
 import com.example.cameraapp.data.Constants.MQTT_USER_NAME
 import com.example.cameraapp.data.Constants.MQTT_USER_PASSWORD
+import com.example.cameraapp.utils.Utils.updateLiveData
 import org.eclipse.paho.client.mqttv3.IMqttActionListener
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken
 import org.eclipse.paho.client.mqttv3.IMqttToken
@@ -67,12 +68,6 @@ class MqttViewModel(): ViewModel() {
                 override fun deliveryComplete(token: IMqttDeliveryToken?) {}
             })
     }
-
-    private fun <T> updateLiveData(liveData: MutableLiveData<T>, message: T) {
-        liveData.value = message
-        liveData.postValue(message)
-    }
-
 
     fun mqttSubscribe(topic: String) {
         if (mqttServer.isConnected()) {

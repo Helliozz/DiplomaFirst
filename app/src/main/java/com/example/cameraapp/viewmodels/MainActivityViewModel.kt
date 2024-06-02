@@ -1,9 +1,12 @@
 package com.example.cameraapp.viewmodels
 
+import android.app.Application
 import android.content.SharedPreferences
+import android.graphics.Bitmap
+import android.net.Uri
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.cameraapp.data.AuthenticationStatus
 import com.example.cameraapp.models.FirebaseRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,12 +15,30 @@ import javax.inject.Inject
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(
     private val rImplementation: FirebaseRepository,
-    private val sPreferences: SharedPreferences
-) : ViewModel() {
+    private val sPreferences: SharedPreferences,
+    application: Application
+) : AndroidViewModel(application) {
     var authState: MutableLiveData<AuthenticationStatus> = MutableLiveData()
+    var cameraData: MutableLiveData<ArrayList<Bitmap>> = MutableLiveData(arrayListOf())
+
+    var currentPhotoIndex = 0
 
     init {
         Log.d("TAG", "Created a view model for the outer app segment successfully.")
+    }
+
+    fun insertPhoto(bitmap: Bitmap) {
+        cameraData.value!!.add(bitmap)
+        cameraData.postValue(cameraData.value)
+        currentPhotoIndex = cameraData.value!!.size
+    }
+
+    fun deletePhoto(bitmap: Bitmap) {
+        if (currentPhotoIndex == cameraData.value!!.size) {
+            currentPhotoIndex -= 1
+        }
+        cameraData.value!!.remove(bitmap)
+        cameraData.postValue(cameraData.value)
     }
 
     fun resetAuthState() {

@@ -44,7 +44,7 @@ class LoginFragment : Fragment() {
         }
 
         if (viewModel.isUserSingedIn()) {
-            requireView().findNavController().navigate(R.id.action_loginFragment_to_cameraFragment)
+            requireView().findNavController().navigate(R.id.action_loginFragment_to_galleryFragment)
         }
         initializeView()
         initAuthObservers()
@@ -59,7 +59,7 @@ class LoginFragment : Fragment() {
                     binding.progressBar.visibility = View.GONE
                     Toast.makeText(activity, "$APP_TOAST_LOGIN_SUCCESS.", Toast.LENGTH_SHORT).show()
                     Log.d("TAG", "Successful login")
-                    requireView().findNavController().navigate(R.id.action_loginFragment_to_cameraFragment)
+                    requireView().findNavController().navigate(R.id.action_loginFragment_to_galleryFragment)
                 }
                 is AuthenticationStatus.Error -> {
                     setButtonVisibility()

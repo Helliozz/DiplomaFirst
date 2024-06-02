@@ -15,10 +15,16 @@ object Constants {
     const val APP_TOAST_SIGNUP_SUCCESS = "Registered successfully"
     const val APP_TOAST_PASSWORD_TOO_SHORT = "Your password should be at least $APP_MIN_PASSWORD_LENGTH characters long."
     const val APP_TOAST_PASSWORDS_DONT_MATCH = "Your passwords don't match. Please confirm your password."
-    const val APP_TOAST_DATA_DOWNLOAD_FAILED = "Failed to download the data"
 
-    val APP_CALENDER_DAY_OF_WEEK = listOf("вс", "пн", "вт", "ср", "чт", "пт", "сб")
+    const val APP_CODE_CAMERA_SELECT_PHOTO = 32768
+    const val APP_CODE_CAMERA_TAKE_PHOTO = 65536
 
+    const val ACTION_VIDEO_SWITCH_SCREEN = "switch_screen"
+    const val ACTION_VIDEO_TURN_LEFT = "turn_left"
+    const val ACTION_VIDEO_TURN_RIGHT = "turn_right"
+    const val ACTION_CAMERA_PHOTO_TAKE = "take_photo"
+    const val ACTION_CAMERA_PHOTO_PREVIOUS = "switch_photo_previous"
+    const val ACTION_CAMERA_PHOTO_NEXT = "switch_photo_next"
 
     const val MQTT_SERVER_URI = "tcp://wqtt.ru"
     const val MQTT_SERVER_PORT = "5031"
@@ -28,14 +34,14 @@ object Constants {
     const val MQTT_USER_NAME = "123"
     const val MQTT_USER_PASSWORD = "123"
 
-    private const val MQTT_TOPIC_MAIN = "camera_app"
+    private const val MQTT_TOPIC_MAIN = "cameradev"
 
     const val MQTT_TOPIC_POWER = "$MQTT_TOPIC_MAIN/power/mode"
 
-//    const val MQTT_TOPIC_COLOR = "$MQTT_TOPIC_MAIN/led/color"
-//    const val MQTT_TOPIC_BRIGHTNESS = "$MQTT_TOPIC_MAIN/led/brig"
-//    const val MQTT_TOPIC_TEMPERATURE = "$MQTT_TOPIC_MAIN/sensor_t_h/temp"
-//    const val MQTT_TOPIC_HUMIDITY = "$MQTT_TOPIC_MAIN/sensor_t_h/hum"
+    const val MQTT_TOPIC_ACTION_CAMERA = "$MQTT_TOPIC_MAIN/action/camera"
+    const val MQTT_TOPIC_ACTION_VIDEO = "$MQTT_TOPIC_MAIN/action/video"
 
-    val MQTT_TOPIC_LIST = emptyList<String>() // Placeholder for future MQTT topics
+    val MQTT_TOPIC_LIST = listOf(MQTT_TOPIC_POWER)
+
+    const val APP_DB_PROPER_NAME = "camera_info_database"
 }

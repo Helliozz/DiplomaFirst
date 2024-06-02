@@ -1,4 +1,4 @@
-package com.example.mqtt
+package com.example.cameraapp.viewmodels
 
 import android.content.Context
 import info.mqtt.android.service.MqttAndroidClient

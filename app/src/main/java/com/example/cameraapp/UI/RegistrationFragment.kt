@@ -38,22 +38,6 @@ class RegistrationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        binding.selectGroupSpinner.adapter = ArrayAdapter((activity as MainActivity), R.layout.spinner_item, viewModel.getGroupNames()).also { adapter ->
-//            adapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
-//        }
-//        for (i in 0 until binding.selectGroupSpinner.adapter.count) {
-//            if (binding.selectGroupSpinner.getItemAtPosition(i).toString() == viewModel.getPreference(APP_PREFERENCES_GROUP_REGISTER, "")) {
-//                binding.selectGroupSpinner.setSelection(i)
-//                break
-//            }
-//        }
-//        binding.selectGroupSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
-//            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-//                viewModel.editPreferences(APP_PREFERENCES_GROUP_REGISTER, parent?.getItemAtPosition(position).toString())
-//            }
-//            override fun onNothingSelected(parent: AdapterView<*>?) {}
-//        }
-
         binding.loginButton.setOnClickListener {
             view.findNavController()
                 .navigate(RegistrationFragmentDirections.actionRegistrationFragmentToLoginFragment())
