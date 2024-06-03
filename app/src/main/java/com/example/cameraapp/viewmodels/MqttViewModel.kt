@@ -111,12 +111,4 @@ class MqttViewModel(): ViewModel() {
             })
         }
     }
-
-    fun updateConnectionText(power: Boolean = this.power.value!!, connectionText: TextView) {
-        if (power) {
-            connectionText.text = "Подключено"
-        } else {
-            connectionText.text = "Отключено"
-        }
-    }
 }

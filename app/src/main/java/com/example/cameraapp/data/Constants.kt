@@ -5,7 +5,8 @@ object Constants {
 
     const val APP_PREFERENCES = "APP_PREFERENCES"
     const val APP_PREFERENCES_STAY = "APP_PREFERENCES_STAY_BOOL"
-    const val APP_PREFERENCES_PUSHES = "APP_PREFERENCES_PUSHES_BOOL"
+
+    const val APP_SQL_DB_PROPER_NAME = "camera_info_database"
 
     const val APP_TOAST_WEAK_CONNECTION = "Looks like there are some problems with connection..."
     const val APP_TOAST_NOT_SIGNED_IN = "You aren't signed in yet."
@@ -42,6 +43,4 @@ object Constants {
     const val MQTT_TOPIC_ACTION_VIDEO = "$MQTT_TOPIC_MAIN/action/video"
 
     val MQTT_TOPIC_LIST = listOf(MQTT_TOPIC_POWER)
-
-    const val APP_DB_PROPER_NAME = "camera_info_database"
 }

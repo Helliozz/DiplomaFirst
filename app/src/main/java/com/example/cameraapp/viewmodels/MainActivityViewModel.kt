@@ -3,42 +3,78 @@ package com.example.cameraapp.viewmodels
 import android.app.Application
 import android.content.SharedPreferences
 import android.graphics.Bitmap
-import android.net.Uri
+import android.graphics.BitmapFactory
+import android.util.Base64
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.example.cameraapp.data.AuthenticationStatus
+import com.example.cameraapp.models.CDataEntity
+import com.example.cameraapp.models.CDataRepository
 import com.example.cameraapp.models.FirebaseRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import okio.Utf8
+import java.io.ByteArrayOutputStream
 import javax.inject.Inject
+
 
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(
     private val rImplementation: FirebaseRepository,
-    private val sPreferences: SharedPreferences,
-    application: Application
-) : AndroidViewModel(application) {
+    private val sPreferences: SharedPreferences
+) : ViewModel() {
     var authState: MutableLiveData<AuthenticationStatus> = MutableLiveData()
-    var cameraData: MutableLiveData<ArrayList<Bitmap>> = MutableLiveData(arrayListOf())
 
     var currentPhotoIndex = 0
+
+    private lateinit var cRepository: CDataRepository
+    private lateinit var cameraData: LiveData<List<CDataEntity>>
 
     init {
         Log.d("TAG", "Created a view model for the outer app segment successfully.")
     }
 
-    fun insertPhoto(bitmap: Bitmap) {
-        cameraData.value!!.add(bitmap)
-        cameraData.postValue(cameraData.value)
-        currentPhotoIndex = cameraData.value!!.size
+    fun initializeRoomDatabase(application: Application) {
+        if (!isUserSingedIn()) {
+            throw(Exception("Attempt to initialize a DB even though the user wasn't signed in."))
+        }
+        cRepository = CDataRepository(application, getUserEmail()!!)
+        cameraData = cRepository.getAllData()
     }
 
-    fun deletePhoto(bitmap: Bitmap) {
-        if (currentPhotoIndex == cameraData.value!!.size) {
+    fun getAllCData(): LiveData<List<CDataEntity>> {
+        return cameraData
+    }
+
+    fun insertPhoto(bitmap: Bitmap) {
+        val stream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+        val bitmapByteArray = stream.toByteArray()
+        stream.close()
+
+        var id = -1
+        getAllCData().value!!.forEach {
+            if (it.id > id) {
+                id = it.id
+            }
+        }
+        id += 1
+
+        currentPhotoIndex = getAllCData().value!!.size
+        cRepository.insert(CDataEntity(id, bitmapByteArray))
+    }
+
+    fun getPhoto(index: Int): Bitmap {
+        val bitmapByteArray = getAllCData().value!![index].value
+        return BitmapFactory.decodeByteArray(bitmapByteArray, 0, bitmapByteArray.size)
+    }
+
+    fun deletePhoto(cdata: CDataEntity) {
+        if (currentPhotoIndex == cameraData.value!!.lastIndex) {
             currentPhotoIndex -= 1
         }
-        cameraData.value!!.remove(bitmap)
-        cameraData.postValue(cameraData.value)
+        cRepository.delete(cdata)
     }
 
     fun resetAuthState() {

@@ -42,7 +42,7 @@ android {
 
 dependencies {
     def nav_version = "2.5.3"
-    def roomVersion = '2.4.3'
+    def roomVersion = '2.6.1'
 
     //Gson
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -72,6 +72,11 @@ dependencies {
     // MQTT
     implementation 'com.github.hannesa2:paho.mqtt.android:4.2'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0' // Legacy library which is necessary for MQTT to work
+
+    // Room components
+    implementation "androidx.room:room-runtime:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+    androidTestImplementation "androidx.room:room-testing:$roomVersion"
 }
 
 kapt {

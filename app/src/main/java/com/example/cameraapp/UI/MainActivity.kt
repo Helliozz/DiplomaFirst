@@ -14,14 +14,11 @@ import androidx.navigation.findNavController
 import com.example.cameraapp.R
 import com.example.cameraapp.data.Constants.APP_CODE_CAMERA_SELECT_PHOTO
 import com.example.cameraapp.data.Constants.APP_CODE_CAMERA_TAKE_PHOTO
-import com.example.cameraapp.data.Constants.APP_PREFERENCES_PUSHES
 import com.example.cameraapp.data.Constants.APP_PREFERENCES_STAY
 import com.example.cameraapp.databinding.ActivityMainBinding
-import com.example.cameraapp.utils.Utils.updateLiveData
 import com.example.cameraapp.viewmodels.MainActivityViewModel
 import com.example.cameraapp.viewmodels.MqttViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.lang.IllegalStateException
 
 
 @Suppress("DEPRECATION")
@@ -39,7 +36,6 @@ class MainActivity : AppCompatActivity() {
         supportActionBar!!.setBackgroundDrawable(ColorDrawable(Color.parseColor("#05080D")))
 
         viewModel.editPreferences(APP_PREFERENCES_STAY, viewModel.getPreference(APP_PREFERENCES_STAY, true))
-        viewModel.editPreferences(APP_PREFERENCES_PUSHES, viewModel.getPreference(APP_PREFERENCES_PUSHES, true))
 
         mqttClient.mqttInitialize(this)
         mqttClient.mqttConnect()
@@ -66,12 +62,12 @@ class MainActivity : AppCompatActivity() {
 
     fun startPhotoSelectingSequence() {
         val cameraIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(cameraIntent, APP_CODE_CAMERA_TAKE_PHOTO)
+        startActivityForResult(cameraIntent, APP_CODE_CAMERA_SELECT_PHOTO)
     }
 
     fun startPhotoTakingSequence() {
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivityForResult(cameraIntent, APP_CODE_CAMERA_SELECT_PHOTO)
+        startActivityForResult(cameraIntent, APP_CODE_CAMERA_TAKE_PHOTO)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -79,21 +75,21 @@ class MainActivity : AppCompatActivity() {
 
         if (requestCode == APP_CODE_CAMERA_TAKE_PHOTO || requestCode == APP_CODE_CAMERA_SELECT_PHOTO) {
             if (resultCode == RESULT_OK) {
-                when(requestCode) {
-                    APP_CODE_CAMERA_SELECT_PHOTO -> {
-                        val targetUri = data?.data
-                        if (targetUri != null) {
-                            val imageBitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(targetUri))
-                            viewModel.insertPhoto(imageBitmap)
-                        }
+                if (requestCode == APP_CODE_CAMERA_SELECT_PHOTO) {
+                    val targetUri = data?.data
+                    if (targetUri != null) {
+                        val imageBitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(targetUri))
+                        viewModel.insertPhoto(imageBitmap)
+                    } else {
+                        Log.d("APP_DEBUGGER", "Encountered a null image for request code $requestCode.")
                     }
-                    APP_CODE_CAMERA_TAKE_PHOTO -> {
-                        val imageBitmap = data?.extras?.get("data") as Bitmap?
-                        if (imageBitmap != null) {
-                            viewModel.insertPhoto(imageBitmap)
-                        }
+                } else {
+                    val imageBitmap = data?.extras?.get("data") as Bitmap?
+                    if (imageBitmap != null) {
+                        viewModel.insertPhoto(imageBitmap)
+                    } else {
+                        Log.d("APP_DEBUGGER", "Encountered a null image for request code $requestCode.")
                     }
-                    else -> throw(IllegalStateException("Wrong request code."))
                 }
                 if (supportFragmentManager.primaryNavigationFragment!!.childFragmentManager.fragments.last()::class.java != GalleryFragment::class.java) {
                     binding.container.findNavController().navigate(R.id.galleryFragment)

@@ -1,5 +1,6 @@
 package com.example.cameraapp.UI
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -36,6 +37,8 @@ class GalleryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.initializeRoomDatabase(requireActivity().application)
+
         binding.arrowForward.setOnClickListener {
             requireView().findNavController()
                 .navigate(R.id.action_galleryFragment_to_screenFragment)
@@ -52,17 +55,17 @@ class GalleryFragment : Fragment() {
         binding.left.setOnClickListener {
             mqttClient.mqttPublish(MQTT_TOPIC_ACTION_CAMERA, ACTION_CAMERA_PHOTO_PREVIOUS)
 
-            if (viewModel.cameraData.value!!.isNotEmpty()) {
+            if (viewModel.getAllCData().value!!.isNotEmpty()) {
                 viewModel.currentPhotoIndex = (viewModel.currentPhotoIndex - 1)
-                if (viewModel.currentPhotoIndex < 0) { viewModel.currentPhotoIndex += viewModel.cameraData.value!!.size }
+                if (viewModel.currentPhotoIndex < 0) { viewModel.currentPhotoIndex += viewModel.getAllCData().value!!.size }
                 loadPhoto()
             }
         }
         binding.right.setOnClickListener {
             mqttClient.mqttPublish(MQTT_TOPIC_ACTION_CAMERA, ACTION_CAMERA_PHOTO_NEXT)
 
-            if (viewModel.cameraData.value!!.isNotEmpty()) {
-                viewModel.currentPhotoIndex = (viewModel.currentPhotoIndex + 1) % viewModel.cameraData.value!!.size
+            if (viewModel.getAllCData().value!!.isNotEmpty()) {
+                viewModel.currentPhotoIndex = (viewModel.currentPhotoIndex + 1) % viewModel.getAllCData().value!!.size
                 loadPhoto()
             }
         }
@@ -72,7 +75,7 @@ class GalleryFragment : Fragment() {
             (requireActivity() as MainActivity).startPhotoTakingSequence()
         }
 
-        viewModel.cameraData.observe(viewLifecycleOwner) {
+        viewModel.getAllCData().observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
                 loadPhoto(it.lastIndex)
             }
@@ -81,11 +84,12 @@ class GalleryFragment : Fragment() {
 
     private fun loadPhoto(index: Int = viewModel.currentPhotoIndex) {
         try {
-            binding.imageView.setImageBitmap(viewModel.cameraData.value!![index])
+            val bitmap = viewModel.getPhoto(index)
+            binding.imageView.setImageBitmap(bitmap)
         } catch (e: Exception) {
             Toast.makeText(requireContext(), "Failed to load the photo.", Toast.LENGTH_SHORT).show()
-            // viewModel.deletePhoto(viewModel.cameraData.value!![index])
-            Log.d("APP_DEBUGGER", "Failed to generate a bitmap.")
+            viewModel.deletePhoto(viewModel.getAllCData().value!![index])
+            Log.d("APP_DEBUGGER", "Failed to load the photo.")
             e.printStackTrace()
         }
     }

@@ -80,8 +80,6 @@ class RegistrationFragment : Fragment() {
                     Toast.makeText(activity, "$APP_TOAST_SIGNUP_SUCCESS.", Toast.LENGTH_SHORT).show()
                     Log.d("TAG", "Successful registration")
 
-//                    viewModel.editPreferences(APP_PREFERENCES_GROUP + "_" + binding.userEmail.text.toString(), viewModel.getPreference(APP_PREFERENCES_GROUP_REGISTER, ""))
-//                    viewModel.editPreferences(APP_PREFERENCES_GROUP_REGISTER, null)
                     requireView().findNavController()
                         .navigate(RegistrationFragmentDirections.actionRegistrationFragmentToLoginFragment())
                 }
